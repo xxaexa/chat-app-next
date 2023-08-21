@@ -7,3 +7,6 @@
 .bg-colors {
   @apply bg-slate-900 min-h-screen text-white;
 }
+.bg-glass {
+  @apply bg-white bg-opacity-20 backdrop-blur-lg;
+}

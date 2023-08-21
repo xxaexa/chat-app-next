@@ -19,16 +19,16 @@ const page = () => {
       setErr(false)
       await signInWithEmailAndPassword(auth, email, password)
       alert('Login Success')
-      router.push('/register')
+      router.push('/')
     } catch (error) {
       setErr(true)
     }
   }
   return (
     <div className="font-shipori flex min-h-screen items-center justify-center p-4 bg-colors">
-      <div className="bg-glass p-4 w-96 rounded-lg  ">
+      <div className="bg-glass p-4 w-96 rounded-lg">
         <form onSubmit={handleSubmit}>
-          <h2 className="text-center my-4 font-semibold text-2xl tw">
+          <h2 className="text-center my-4 font-semibold text-2xl tracking-widest">
             CHAT APPS
           </h2>
           {err && (

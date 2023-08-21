@@ -1,8 +1,9 @@
 'use client'
 
 import { Sidebar, Chat } from '@/components'
-
+import ProtectedRoute from '@/components/ProtectedRoute'
 const Home = () => {
+  ProtectedRoute()
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="w-10/12 rounded-lg mx-auto flex  ">

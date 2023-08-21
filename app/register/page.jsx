@@ -66,7 +66,7 @@ const Page = () => {
     }
   }
   return (
-    <div className="bg-colors flex min-h-screen items-center justify-center p-4  font-shipori">
+    <div className="bg-colors flex min-h-screen items-center justify-center p-4  font-shipori tracking-widest">
       <div className="bg-glass p-4 w-96 rounded-lg  ">
         <form onSubmit={handleSubmit}>
           <h2 className="text-center tw my-4 font-semibold text-2xl">

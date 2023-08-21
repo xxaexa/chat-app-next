@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { auth } from '@/firebase/config'
 import { AuthContext } from '@/context/AuthContext'
 import { signOut } from 'firebase/auth'
+import Image from 'next/image'
 
 const Nav = () => {
   const { currentUser } = useContext(AuthContext)
@@ -19,7 +20,9 @@ const Nav = () => {
           />
         </>
       )}
-      <button onClick={() => signOut(auth)}>logout</button>
+      <button onClick={() => signOut(auth)}>
+        <Image src={'/image/logout.svg'} width={35} height={35} alt="logout" />
+      </button>
     </div>
   )
 }
