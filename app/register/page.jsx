@@ -6,10 +6,9 @@ import { auth, db, storage } from '@/firebase/config'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { doc, setDoc } from 'firebase/firestore'
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 const Page = () => {
   // configuration
-  const router = useRouter()
   const [err, setErr] = useState(false)
   const [error, setError] = useState('')
   const [name, setName] = useState('')
@@ -25,7 +24,7 @@ const Page = () => {
     try {
       //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password)
-      alert('Sukses')
+      alert('Account Created redirect to login page')
       //Create a unique image name
       const date = new Date().getTime()
       const storageRef = ref(storage, `${displayName + date}`)
@@ -50,8 +49,7 @@ const Page = () => {
 
             //create empty user chats on firestore
             await setDoc(doc(db, 'userChats', res.user.uid), {})
-
-            router.push('/login')
+            redirect('/login')
           } catch (error) {
             setError(JSON.stringify(error.code))
             setErr(true)

@@ -29,7 +29,7 @@ const Chats = () => {
   }
 
   return (
-    <div className="px-2">
+    <div className="h-[calc(610px-38px)] px-4">
       {Object.entries(chats)
         ?.sort((a, b) => b[1].date - a[1].date)
         .map((chat) => (
@@ -37,8 +37,12 @@ const Chats = () => {
             className="flex justify-between items-center"
             key={chat[0]}
             onClick={() => handleSelect(chat[1].userInfo)}>
-            <img src={chat[1].userInfo.photoURL} alt="" className="w-8 h-8" />
-            <div className="userChatInfo">
+            <img
+              src={chat[1].userInfo.photoURL}
+              alt=""
+              className="w-8 h-8 cursor-pointer"
+            />
+            <div className="cursor-pointer">
               <span>{chat[1].userInfo.displayName}</span>
               <p className="text-right">
                 {chat[1].lastMessage?.text.substring(0, 5)}

@@ -77,24 +77,39 @@ const Search = () => {
     setUsername('')
   }
   return (
-    <div className="py-4">
-      <div className="w-full">
+    <div className="border-t-2 border-black relative">
+      <div className="w-full h-16 items-center flex pr-2">
         <input
           type="text"
           placeholder="Find a user"
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
-          className="w-full px-2 bg-pink-200 border-b-2 border-white"
+          className="px-2 w-full bg-none bg-transparent outline-none text-white placeholder:text-white "
         />
+        <img src="image/search.svg" alt="" className="w-8 h-8" />
       </div>
-      {err && <span>User not found!</span>}
+      {err && (
+        <span className="fixed bottom-16 bg-black bg-opacity-20 flex w-full py-2 px-2 items-center justify-between text-red-400">
+          User not found!
+        </span>
+      )}
       {user && (
-        <div className="userChat" onClick={handleSelect}>
-          <img src={user.photoURL} alt="" />
-          <div className="userChatInfo">
-            <span>{user.displayName}</span>
+        <div
+          className="fixed bottom-16 bg-black bg-opacity-20 flex w-full py-2 px-2 items-center justify-between"
+          onClick={handleSelect}>
+          <div>
+            <img
+              src={user.photoURL}
+              alt={user.displayName}
+              className="w-16 h-16 rounded-full"
+            />
+            <span className="px-3">{user.displayName}</span>
           </div>
+          <button className="mx-2">
+            <img src="image/chat.svg" alt="close" className="w-12 h-12" />
+            Chat
+          </button>
         </div>
       )}
     </div>
