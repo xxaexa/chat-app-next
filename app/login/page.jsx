@@ -4,11 +4,10 @@ import { FormRow } from '@/components'
 import { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '@/firebase/config'
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 const page = () => {
   // configuration
-  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [err, setErr] = useState(false)
@@ -19,7 +18,7 @@ const page = () => {
       setErr(false)
       await signInWithEmailAndPassword(auth, email, password)
       alert('Login Success')
-      router.push('/')
+      redirect('/')
     } catch (error) {
       setErr(true)
     }
