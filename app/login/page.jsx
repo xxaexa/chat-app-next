@@ -6,7 +6,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '@/firebase/config'
 import { redirect } from 'next/navigation'
 
-const page = () => {
+const Page = () => {
   // configuration
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -70,4 +70,4 @@ const page = () => {
     </div>
   )
 }
-export default page
+export default Page
