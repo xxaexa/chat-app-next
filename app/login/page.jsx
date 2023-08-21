@@ -56,7 +56,7 @@ const Page = () => {
 
           {/* Text */}
           <p className="text-center tw">
-            Don't Have Account ?
+            Dont Have Account ?
             <span
               className="cursor-pointer text-center"
               onClick={() => {
