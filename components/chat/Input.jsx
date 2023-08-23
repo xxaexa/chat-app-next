@@ -11,6 +11,7 @@ import {
 import { db, storage } from './../../firebase/config'
 import { v4 as uuid } from 'uuid'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
+import Image from 'next/image'
 
 // image
 
@@ -95,15 +96,23 @@ const Input = () => {
           onChange={(e) => setImg(e.target.files[0])}
         />
         <label htmlFor="file">
-          <img
+          <Image
             src="/image/img.svg"
             alt="addImage"
-            className="w-8 stroke-white"
+            className="w-8"
+            width={100}
+            height={100}
           />
         </label>
 
         <button onClick={handleSend}>
-          <img src="/image/send.svg" alt="send" className="w-8" />
+          <Image
+            src="/image/send.svg"
+            alt="send"
+            className="w-8"
+            width={100}
+            height={100}
+          />
         </button>
       </div>
     </div>

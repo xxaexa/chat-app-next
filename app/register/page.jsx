@@ -6,7 +6,9 @@ import { auth, db, storage } from '@/firebase/config'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { doc, setDoc } from 'firebase/firestore'
-import { redirect } from 'next/navigation'
+import Link from 'next/link'
+import Image from 'next/image'
+
 const Page = () => {
   // configuration
   const [err, setErr] = useState(false)
@@ -14,7 +16,6 @@ const Page = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(true)
 
   // Handle submit
   const handleSubmit = async (e) => {
@@ -24,13 +25,11 @@ const Page = () => {
     try {
       //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password)
-      alert('Account Created redirect to login page')
+      alert('Account Created')
       //Create a unique image name
       const date = new Date().getTime()
       const storageRef = ref(storage, `${displayName + date}`)
-
       //
-
       await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
@@ -46,21 +45,17 @@ const Page = () => {
               email,
               photoURL: downloadURL,
             })
-
             //create empty user chats on firestore
             await setDoc(doc(db, 'userChats', res.user.uid), {})
-            redirect('/login')
           } catch (error) {
             setError(JSON.stringify(error.code))
             setErr(true)
-            setLoading(false)
           }
         })
       })
     } catch (error) {
       setError(JSON.stringify(error.code))
       setErr(true)
-      setLoading(false)
     }
   }
   return (
@@ -100,7 +95,13 @@ const Page = () => {
 
           {/* Image */}
           <div className="flex flex-row items-center bg-white rounded-lg">
-            <img src="image/img.svg" alt="img" className="w-12 bg-white mx-2" />
+            <Image
+              src="image/imgpp.svg"
+              width={100}
+              height={100}
+              alt="imgpp"
+              className="w-12 mx-2"
+            />
             <label htmlFor="file" className="text-slate-700 cursor-pointer">
               Upload Image for your profile
             </label>
@@ -115,13 +116,9 @@ const Page = () => {
           {/* Text */}
           <p className="text-center tw">
             Don't Have Account ?
-            <span
-              className="cursor-pointer text-center"
-              onClick={() => {
-                router.push('/login')
-              }}>
-              &nbsp;Sign In
-            </span>
+            <Link href={'/login'}>
+              <span className="cursor-pointer text-center">&nbsp;Sign In</span>
+            </Link>
           </p>
         </form>
       </div>

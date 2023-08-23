@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from './../../context/AuthContext'
 import { ChatContext } from './../../context/ChatContext'
 import { db } from './../../firebase/config'
+import Image from 'next/image'
 
 const Chats = () => {
   const [chats, setChats] = useState([])
@@ -29,7 +30,7 @@ const Chats = () => {
   }
 
   return (
-    <div className="h-[calc(610px-38px)] px-4">
+    <div className="h-[calc(610px-38px)] px-3">
       {Object.entries(chats)
         ?.sort((a, b) => b[1].date - a[1].date)
         .map((chat) => (
@@ -37,10 +38,12 @@ const Chats = () => {
             className="flex justify-between items-center"
             key={chat[0]}
             onClick={() => handleSelect(chat[1].userInfo)}>
-            <img
+            <Image
               src={chat[1].userInfo.photoURL}
-              alt=""
-              className="w-8 h-8 cursor-pointer"
+              width={100}
+              height={100}
+              alt={chat[1].userInfo.displayName}
+              className="w-10 h-10 cursor-pointer rounded-full"
             />
             <div className="cursor-pointer">
               <span>{chat[1].userInfo.displayName}</span>

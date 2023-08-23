@@ -18,8 +18,6 @@ const Messages = () => {
     }
   }, [data.chatId])
 
-  console.log(messages)
-
   return (
     <div className=" border-l-2 h-[calc(610px-38px)]  border-black items-center overflow-auto">
       {messages.map((m) => (

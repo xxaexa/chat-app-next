@@ -12,6 +12,8 @@ import {
 } from 'firebase/firestore'
 import { db } from './../../firebase/config'
 import { AuthContext } from './../../context/AuthContext'
+import Image from 'next/image'
+
 const Search = () => {
   const [username, setUsername] = useState('')
   const [user, setUser] = useState(null)
@@ -20,23 +22,19 @@ const Search = () => {
   const { currentUser } = useContext(AuthContext)
 
   const handleSearch = async () => {
+    setUser(null)
     const q = query(
       collection(db, 'users'),
       where('displayName', '==', username)
     )
 
-    try {
-      const querySnapshot = await getDocs(q)
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data())
-      })
-    } catch (err) {
-      setErr(true)
-    }
-  }
-
-  const handleKey = (e) => {
-    e.code === 'Enter' && handleSearch()
+    const querySnapshot = await getDocs(q)
+    querySnapshot.forEach((doc) => {
+      setUser(doc.data())
+    })
+    console.log(user)
+    console.log(user === null)
+    console.log(user === undefined)
   }
 
   const handleSelect = async () => {
@@ -71,10 +69,12 @@ const Search = () => {
           [combinedId + '.date']: serverTimestamp(),
         })
       }
-    } catch (err) {}
-
+    } catch (err) {
+      setErr('')
+    }
     setUser(null)
     setUsername('')
+    setErr(false)
   }
   return (
     <div className="border-t-2 border-black relative">
@@ -82,32 +82,47 @@ const Search = () => {
         <input
           type="text"
           placeholder="Find a user"
-          onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
           className="px-2 w-full bg-none bg-transparent outline-none text-white placeholder:text-white "
         />
-        <img src="image/search.svg" alt="" className="w-8 h-8" />
+        <Image
+          src="image/search.svg"
+          alt="search"
+          className="w-8 h-8 cursor-pointer"
+          width={100}
+          height={100}
+          onClick={handleSearch}
+        />
       </div>
       {err && (
-        <span className="fixed bottom-16 bg-black bg-opacity-20 flex w-full py-2 px-2 items-center justify-between text-red-400">
+        <span className="fixed bottom-16 bg-black bg-opacity-20 flex w-full py-2 px-2 items-center justify-between text-red-400 text-center">
           User not found!
         </span>
       )}
+
       {user && (
         <div
           className="fixed bottom-16 bg-black bg-opacity-20 flex w-full py-2 px-2 items-center justify-between"
           onClick={handleSelect}>
           <div>
-            <img
+            <Image
               src={user.photoURL}
               alt={user.displayName}
-              className="w-16 h-16 rounded-full"
+              className="w-12 h-12 rounded-full"
+              width={100}
+              height={100}
             />
-            <span className="px-3">{user.displayName}</span>
+            <span>{user.displayName}</span>
           </div>
           <button className="mx-2">
-            <img src="image/chat.svg" alt="close" className="w-12 h-12" />
+            <Image
+              src="image/chat.svg"
+              alt="close"
+              className="w-12 h-12"
+              width={100}
+              height={100}
+            />
             Chat
           </button>
         </div>

@@ -9,19 +9,16 @@ const Nav = () => {
 
   return (
     <div className="flex justify-between items-center h-16 px-2 border-b-2 border-black bg-white bg-opacity-20 backdrop-blur-lg rounded-tl-lg">
-      {currentUser.length === 0 ? (
-        <p>Loading</p>
-      ) : (
-        <>
-          <img
-            src={currentUser.photoURL}
-            alt={currentUser.displayName}
-            className="w-12 h-12 rounded-full"
-          />
-        </>
-      )}
+      <Image
+        src={currentUser.photoURL}
+        alt={currentUser.displayName}
+        width={100}
+        height={100}
+        className="w-12 h-12 rounded-full"
+      />
+
       <button onClick={() => signOut(auth)}>
-        <Image src={'/image/logout.svg'} width={35} height={35} alt="logout" />
+        <Image src={'/image/logout.svg'} alt="logout" width={35} height={35} />
       </button>
     </div>
   )

@@ -6,4 +6,7 @@ module.exports = {
   env: {
     customKey: 'my-value',
   },
+  images: {
+    domains: ['firebasestorage.googleapis.com'],
+  },
 }
