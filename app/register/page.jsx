@@ -115,7 +115,7 @@ const Page = () => {
 
           {/* Text */}
           <p className="text-center tw">
-            Don't Have Account ?
+            Dont Have Account ?
             <Link href={'/login'}>
               <span className="cursor-pointer text-center">&nbsp;Sign In</span>
             </Link>

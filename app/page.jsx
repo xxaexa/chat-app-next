@@ -2,31 +2,19 @@
 
 import { Sidebar, Chat } from '@/components'
 import ProtectedRoute from '@/components/ProtectedRoute'
-import { useEffect, useState } from 'react'
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(!isLoading)
-    }, 2000)
-  }, [])
-
   ProtectedRoute()
   return (
     <div className="min-h-screen flex justify-center items-center">
-      {isLoading === true ? (
-        <p>Loading ...</p>
-      ) : (
-        <div className="w-10/12 rounded-lg mx-auto flex  ">
-          <div className="w-1/3 bg-white bg-opacity-20 backdrop-blur-lg h-[700px] rounded-l-xl">
-            <Sidebar />
-          </div>
-          <div className="w-2/3 bg-white bg-opacity-20 backdrop-blur-lg rounded-r-xl h-[700px]">
-            <Chat />
-          </div>
+      <div className="w-10/12 rounded-lg mx-auto flex  ">
+        <div className="w-1/3 bg-white bg-opacity-20 backdrop-blur-lg h-[700px] rounded-l-xl">
+          <Sidebar />
         </div>
-      )}
+        <div className="w-2/3 bg-white bg-opacity-20 backdrop-blur-lg rounded-r-xl h-[700px]">
+          <Chat />
+        </div>
+      </div>
     </div>
   )
 }
